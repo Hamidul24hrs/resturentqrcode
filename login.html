@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Menu Login & Sign Up</title>
+  <title>Digital Menu Login</title>
   <style>
     /* General Styles */
     body {
@@ -100,7 +100,6 @@
 
     /* Submit Button */
     .button {
-      background-color: #feb47b;
       color: white;
       width: 100%;
       padding: 12px;
@@ -111,8 +110,22 @@
       transition: background-color 0.3s;
     }
 
-    .button:hover {
+    /* Log In Button */
+    .button-login {
+      background-color: #feb47b;
+    }
+
+    .button-login:hover {
       background-color: #ff7e5f;
+    }
+
+    /* Demo Login Button */
+    .button-demo {
+      background-color: #4CAF50;
+    }
+
+    .button-demo:hover {
+      background-color: #45a049;
     }
 
     .req {
@@ -144,35 +157,10 @@
   <div class="form-container">
     <div class="form">
       <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#login">Log In</a></li>
       </ul>
 
       <div class="tab-content">
-        <!-- Sign Up Form -->
-        <div id="signup">   
-          <h1>Create an Account</h1>
-          <form id="signup-form">
-            <div class="field-wrap">
-              <label>First Name<span class="req">*</span></label>
-              <input type="text" required id="signup-first-name" autocomplete="off" />
-            </div>
-            <div class="field-wrap">
-              <label>Last Name<span class="req">*</span></label>
-              <input type="text" required id="signup-last-name" autocomplete="off" />
-            </div>
-            <div class="field-wrap">
-              <label>Email Address<span class="req">*</span></label>
-              <input type="email" required id="signup-email" autocomplete="off" />
-            </div>
-            <div class="field-wrap">
-              <label>Password<span class="req">*</span></label>
-              <input type="password" required id="signup-password" autocomplete="off" />
-            </div>
-            <button type="submit" class="button">Get Started</button>
-          </form>
-        </div>
-
         <!-- Log In Form -->
         <div id="login">   
           <h1>Welcome Back!</h1>
@@ -185,7 +173,8 @@
               <label>Password<span class="req">*</span></label>
               <input type="password" required id="login-password" autocomplete="off" />
             </div>
-            <button type="submit" class="button">Log In</button>
+            <button type="submit" class="button button-login">Log In</button>
+            <button type="button" class="button button-demo" id="demo-login">Demo Login</button>
           </form>
         </div>
       </div><!-- tab-content -->
@@ -194,17 +183,7 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    // Handle form switching
-    $('.tab a').on('click', function (e) {
-      e.preventDefault();
-      $(this).parent().addClass('active');
-      $(this).parent().siblings().removeClass('active');
-      target = $(this).attr('href');
-      $('.tab-content > div').not(target).hide();
-      $(target).fadeIn(600);
-    });
-
-    // Handle login form submission
+    // Handle form submission
     $('#login-form').submit(function(e){
       e.preventDefault();
       let email = $('#login-email').val();
@@ -212,7 +191,7 @@
 
       // Hardcoded login credentials for demo purposes
       if(email === 'test@example.com' && password === 'password123') {
-        // Save login status to local storage (to simulate keeping the user logged in)
+        // Save login status to local storage
         localStorage.setItem('isLoggedIn', true);
         alert('Login Successful');
         window.location.href = 'index.html'; // Redirect to dashboard
@@ -221,14 +200,10 @@
       }
     });
 
-    // Handle signup form submission
-    $('#signup-form').submit(function(e){
-      e.preventDefault();
-      // Handle signup here (e.g., send data to the server)
-      alert('Signup Successful');
-      // After successful signup, auto-login or redirect the user
-      localStorage.setItem('isLoggedIn', true);
-      window.location.href = 'index.html'; // Redirect to dashboard after signup
+    // Handle Demo login
+    $('#demo-login').click(function() {
+      $('#login-email').val('test@example.com');
+      $('#login-password').val('password123');
     });
 
     // Check if user is logged in, if so, redirect to dashboard
