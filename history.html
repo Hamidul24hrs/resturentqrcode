@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History</title>
+  
+  <style>
+
+    body
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  padding-top: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar img {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  border-radius: 10px;
+  margin: 5px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar a:hover {
+  background-color: #ffa901;
+  color: white;
+}
+
+.sidebar a img {
+  width: 20%;
+}
+
+.sidebar a span {
+  margin-left: 10px;
+}
+
+.sidebar .active {
+  background-color: #ffa901;
+  color: white;
+}
+
+.sidebar .submenu {
+  display: none;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+.sidebar .submenu a {
+  padding: 12px;
+  font-size: 16px;
+}
+
+.sidebar .active-submenu {
+  display: block;
+}
+
+.sidebar .h-4 {
+  height: 16px;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+
+
+
+     {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    .container {
+      width: 90%;
+      margin: 20px auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+    }
+    .btn-approve {
+      background-color: #28a745;
+    }
+    .btn-cancel {
+      background-color: #dc3545;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+	<div class="w-[22%] lg:block hidden overflow-y-auto fixed bg-white text-black h-full mb-12 sidebar">
+  <div class="h-[100vh]">
+    <div class="flex items-center justify-center mt-5 mb-11">
+      <img src="rs1.png" alt="Digital Menu" class="w-20 h-20 mr-2">
+    </div>
+
+    <div>
+      <a href="index.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium bg-[#ffa901] text-black p-2 text-lg font-semibold">
+        <img src="dsh.png" alt="menu_icon" class="w-[20%]">
+        <span>Dashboard</span>
+      </a>
+
+      <a href="menu.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-gray-800 p-2 text-lg font-semibold">
+        <img src="menu.png" alt="menu_icon" class="w-[20%]">
+        <span>Menu</span>
+      </a>
+
+      <a href="offer.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Promo</span>
+      </a>
+      <div class="submenu">
+        <a href="/offer" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/offers.png" alt="menu_icon" class="w-[20%]">
+          <span>Offer</span>
+        </a>
+      </div>
+
+      <a href="/stock" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Stock</span>
+      </a>
+      <div class="submenu">
+        <a href="/stock" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/stock.png" alt="menu_icon" class="w-[20%]">
+          <span>Stock</span>
+        </a>
+        <a href="qr-code.html" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/qr_code.png" alt="menu_icon" class="w-[20%]">
+          <span>QR Code</span>
+        </a>
+      </div>
+
+      <a href="/order-history" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">History</span>
+      </a>
+      <div class="submenu">
+        <a href="/order-history" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/order.png" alt="menu_icon" class="w-[20%]">
+          <span>Order History</span>
+        </a>
+        <a href="/table-order" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/table.png" alt="menu_icon" class="w-[20%]">
+          <span>Table Order</span>
+        </a>
+      </div>
+
+      <a href="/employee" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Users</span>
+      </a>
+      <div class="submenu">
+        <a href="/employee" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/employees.png" alt="menu_icon" class="w-[20%]">
+          <span>Employees</span>
+        </a>
+      </div>
+
+      <a href="/extras" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">POS</span>
+      </a>
+      <div class="submenu">
+        <a href="/extras" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/sales_report.png" alt="menu_icon" class="w-[20%]">
+          <span>Point Of Sale</span>
+        </a>
+      </div>
+
+      <a href="/dashboard" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Setup</span>
+      </a>
+      <div class="submenu">
+        <a href="/dashboard" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/logout.png" alt="menu_icon" class="w-[20%]">
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="container">
+    <h1>Order History</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Table No</th>
+          <th>Order Details</th>
+          <th>Total Bill</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#1001</td>
+          <td>Table 5</td>
+          <td>Burger, Fries, Coke</td>
+          <td>$25.00</td>
+          <td>12:30 PM</td>
+          <td>Pending</td>
+          <td>
+            <button class="btn btn-approve">Approve</button>
+            <button class="btn btn-cancel">Cancel</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#1002</td>
+          <td>Table 3</td>
+          <td>Pasta, Salad</td>
+          <td>$18.50</td>
+          <td>12:45 PM</td>
+          <td>Pending</td>
+          <td>
+            <button class="btn btn-approve">Approve</button>
+            <button class="btn btn-cancel">Cancel</button>
+          </td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.querySelectorAll('.btn-approve').forEach(button => {
+      button.addEventListener('click', () => {
+        const row = button.closest('tr');
+        row.querySelector('td:nth-child(6)').textContent = 'Approved';
+      });
+    });
+
+    document.querySelectorAll('.btn-cancel').forEach(button => {
+      button.addEventListener('click', () => {
+        const row = button.closest('tr');
+        row.querySelector('td:nth-child(6)').textContent = 'Cancelled';
+      });
+    });
+  </script>
+  
+
+
+</body>
+</html>

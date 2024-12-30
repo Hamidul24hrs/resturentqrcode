@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Point of Sale</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="pos-container">
+    <header>
+      <h1>Point of Sale (POS)</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <div class="pos-content">
+      <!-- Product Selection -->
+      <section class="product-selection">
+        <h2>Products</h2>
+        <div class="product-list">
+          <!-- Sample Products -->
+          <div class="product">
+            <span>Product 1</span>
+            <span>$10.00</span>
+            <button onclick="addToCart('Product 1', 10)">Add to Cart</button>
+          </div>
+          <div class="product">
+            <span>Product 2</span>
+            <span>$15.00</span>
+            <button onclick="addToCart('Product 2', 15)">Add to Cart</button>
+          </div>
+          <div class="product">
+            <span>Product 3</span>
+            <span>$20.00</span>
+            <button onclick="addToCart('Product 3', 20)">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cart Section -->
+      <section class="cart">
+        <h2>Shopping Cart</h2>
+        <div id="cart-items">
+          <!-- Cart Items Will Be Listed Here -->
+        </div>
+        <div class="cart-summary">
+          <p>Total: $<span id="total-price">0.00</span></p>
+          <button id="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+
+    // Add product to cart
+    function addToCart(productName, productPrice) {
+      const product = { name: productName, price: productPrice, quantity: 1 };
+      cart.push(product);
+      updateCart();
+    }
+
+    // Update the cart display and total price
+    function updateCart() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      cartItemsDiv.innerHTML = '';
+      let totalPrice = 0;
+      
+      cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('cart-item');
+        itemDiv.innerHTML = `
+          <span>${item.name}</span>
+          <span>$${item.price}</span>
+          <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItemsDiv.appendChild(itemDiv);
+        totalPrice += item.price * item.quantity;
+      });
+
+      // Update total price
+      document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+    }
+
+    // Update item quantity
+    function updateQuantity(index, quantity) {
+      cart[index].quantity = parseInt(quantity);
+      updateCart();
+    }
+
+    // Remove item from cart
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    // Checkout
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty. Please add items to proceed.");
+        return;
+      }
+      
+      const totalPrice = document.getElementById('total-price').textContent;
+      alert(`Checkout Successful! Total: $${totalPrice}`);
+      cart = [];  // Clear the cart after checkout
+      updateCart();
+    }
+
+    // Logout function
+    function logout() {
+      // Remove the login status from localStorage
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('username');
+      // Redirect to login page after logout
+      window.location.href = "login.html";
+    }
+  </script>
+  
+  <script src="script.js"></script>
+</body>
+</html>

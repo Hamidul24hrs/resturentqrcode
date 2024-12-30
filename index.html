@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Menu Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js Library -->
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Admin Panel</h2>
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="offer.html">Offer</a></li>
+          <li><a href="qr-code.html">QR-Code</a></li>
+          <li><a href="history.html">Order page</a></li>
+          <li><a href="#">Food Settings</a></li>
+          <li><a href="#">Sales</a></li>
+          <li><a href="stock.html">Stock</a></li>
+          <li><a href="#">Accounts</a></li>
+           <li><a href="emply.html">Employees</a></li>
+          <li><a href="pos.html">POS-Point Of Sale</a></li>
+          <li><a href="#">Reports</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <h1>Dashboard Overview</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </header>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Total Sales</h3>
+          <p>$10,000</p>
+        </div>
+        <div class="card">
+          <h3>Total Orders</h3>
+          <p>200</p>
+        </div>
+        <div class="card">
+          <h3>Total Customers</h3>
+          <p>150</p>
+        </div>
+        <div class="card">
+          <h3>Stock Alert</h3>
+          <p>5 items low</p>
+        </div>
+      </section>
+
+      <!-- Charts Section -->
+      <section class="charts">
+        <!-- Daily and Total Sales Chart -->
+        <div class="chart-container">
+          <h3>Daily and Total Sales</h3>
+          <canvas id="dailySalesChart"></canvas>
+        </div>
+        
+        <!-- Total Sales and Profit Chart -->
+        <div class="chart-container">
+          <h3>Total Sales and Profit</h3>
+          <canvas id="salesProfitChart"></canvas>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Check if the user is logged in
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      // If not logged in, redirect to the login page
+      window.location.href = "login.html";
+    }
+
+    // Logout function
+    function logout() {
+      // Remove the login status from localStorage
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('username');
+
+      // Redirect to login page after logout
+      window.location.href = "login.html";
+    }
+
+    // Daily and Total Sales Chart
+    var ctx1 = document.getElementById('dailySalesChart').getContext('2d');
+    var dailySalesChart = new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'], // Example labels
+        datasets: [{
+          label: 'Daily Sales ($)',
+          data: [1200, 1400, 1300, 1500, 1600, 1800], // Example data for daily sales
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+        }, {
+          label: 'Total Sales ($)',
+          data: [1200, 2600, 3900, 5400, 7000, 8800], // Example data for total sales
+          borderColor: 'rgba(153, 102, 255, 1)',
+          backgroundColor: 'rgba(153, 102, 255, 0.2)',
+          fill: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Total Sales and Profit Chart
+    var ctx2 = document.getElementById('salesProfitChart').getContext('2d');
+    var salesProfitChart = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'], // Example labels
+        datasets: [{
+          label: 'Total Sales ($)',
+          data: [1200, 2600, 3900, 5400, 7000, 8800], // Example data for total sales
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        }, {
+          label: 'Profit ($)',
+          data: [400, 600, 500, 700, 800, 900], // Example data for profit
+          backgroundColor: 'rgba(255, 159, 64, 0.5)',
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

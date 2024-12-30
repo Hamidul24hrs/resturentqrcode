@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Information</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+  /* Sidebar Styles */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding-top: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100; /* Ensure sidebar is on top of other content */
+    overflow-y: auto;
+    display: block; /* Make sure sidebar is displayed */
+  }
+
+  .sidebar img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+  }
+
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    border-radius: 10px;
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .sidebar a:hover {
+    background-color: #ffa901;
+    color: white;
+  }
+
+  .sidebar a img {
+    width: 20%;
+  }
+
+  .sidebar a span {
+    margin-left: 10px;
+  }
+
+  .sidebar .active {
+    background-color: #ffa901;
+    color: white;
+  }
+
+  .sidebar .submenu {
+    display: none;
+    margin-left: 20px;
+    padding-left: 10px;
+  }
+
+  .sidebar .submenu a {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .sidebar .active-submenu {
+    display: block;
+  }
+
+  .sidebar .h-4 {
+    height: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .sidebar {
+      width: 200px;
+    }
+
+    .sidebar img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  /* Main Content Styles */
+  .container {
+    margin-left: 270px; /* Leave space for sidebar */
+    padding: 20px;
+  }
+
+  /* Main Content Styles */
+.container {
+  margin-left: 270px; /* সাইডবারের জন্য যথাযথ জায়গা রাখা */
+  padding: 20px;
+}
+.container {
+  margin-left: 600px; /* সাইডবারের সাথে সঠিক ফাঁকা জায়গা রাখুন */
+  padding: 20px;
+}
+
+</style>
+<body>
+
+  <div class="sidebar">
+    <div class="h-[100vh]">
+      <div class="flex items-center justify-center mt-5 mb-11">
+        <img src="rs1.png" alt="Digital Menu" class="w-20 h-20 mr-2">
+      </div>
+
+      <div>
+        <a href="index.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium bg-[#ffa901] text-black p-2 text-lg font-semibold">
+          <img src="dsh.png" alt="menu_icon" class="w-[20%]">
+          <span>Dashboard</span>
+        </a>
+
+        <a href="menu.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-gray-800 p-2 text-lg font-semibold">
+          <img src="menu.png" alt="menu_icon" class="w-[20%]">
+          <span>Menu</span>
+        </a>
+
+        <a href="offer.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+          <span class="tracking-widest">Promo</span>
+        </a>
+
+        <a href="/stock" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+          <span class="tracking-widest">Stock</span>
+        </a>
+
+        <a href="/order-history" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+          <span class="tracking-widest">History</span>
+        </a>
+
+        <a href="/employee" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+          <span class="tracking-widest">Users</span>
+        </a>
+
+        <a href="/extras" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+          <span class="tracking-widest">POS</span>
+        </a>
+
+        <a href="/dashboard" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+          <span class="tracking-widest">Setup</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Employee Information</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <section class="employee-form-section">
+      <h2>Add New Employee</h2>
+      <form id="employee-form" enctype="multipart/form-data">
+        <label for="emp-name">Employee Name:</label>
+        <input type="text" id="emp-name" required>
+
+        <label for="emp-position">Position:</label>
+        <input type="text" id="emp-position" required>
+
+        <label for="emp-contact">Contact:</label>
+        <input type="text" id="emp-contact" required>
+
+        <label for="emp-email">Email:</label>
+        <input type="email" id="emp-email" required>
+
+        <label for="emp-salary">Salary:</label>
+        <input type="number" id="emp-salary" required>
+
+        <label for="emp-photo">Employee Photo:</label>
+        <input type="file" id="emp-photo" accept="image/*" required>
+
+        <button type="submit" class="btn">Add Employee</button>
+      </form>
+    </section>
+
+    <section class="employee-list-section">
+      <h2>Employee List</h2>
+      <table id="employee-list">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Employee data will be dynamically added here -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    let employees = [];
+
+    // Add Employee
+    document.getElementById('employee-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('emp-name').value;
+      const position = document.getElementById('emp-position').value;
+      const contact = document.getElementById('emp-contact').value;
+      const email = document.getElementById('emp-email').value;
+      const salary = document.getElementById('emp-salary').value;
+      const photo = document.getElementById('emp-photo').files[0];
+
+      // Create new employee object
+      const employee = {
+        name,
+        position,
+        contact,
+        email,
+        salary,
+        photo: URL.createObjectURL(photo) // Create a URL for the photo
+      };
+
+      // Add employee to the array
+      employees.push(employee);
+      
+      // Clear the form fields
+      document.getElementById('employee-form').reset();
+      
+      // Update the employee list
+      updateEmployeeList();
+    });
+
+    // Update Employee List
+    function updateEmployeeList() {
+      const tableBody = document.getElementById('employee-list').getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = '';
+
+      employees.forEach((employee, index) => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td><img src="${employee.photo}" alt="${employee.name}'s Photo" class="employee-photo"></td>
+          <td>${employee.name}</td>
+          <td>${employee.position}</td>
+          <td>${employee.contact}</td>
+          <td>${employee.email}</td>
+          <td>$${employee.salary}</td>
+          <td>
+            <button onclick="editEmployee(${index})">Edit</button>
+            <button onclick="deleteEmployee(${index})">Delete</button>
+          </td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Edit Employee
+    function editEmployee(index) {
+      const employee = employees[index];
+      document.getElementById('emp-name').value = employee.name;
+      document.getElementById('emp-position').value = employee.position;
+      document.getElementById('emp-contact').value = employee.contact;
+      document.getElementById('emp-email').value = employee.email;
+      document.getElementById('emp-salary').value = employee.salary;
+    }
+
+    // Delete Employee
+    function deleteEmployee(index) {
+      employees.splice(index, 1);
+      updateEmployeeList();
+    }
+
+    // Logout function
+    function logout() {
+      window.location.href = '/login';
+    }
+  </script>
+</body>
+</html>

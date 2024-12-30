@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  padding-top: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar img {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  border-radius: 10px;
+  margin: 5px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar a:hover {
+  background-color: #ffa901;
+  color: white;
+}
+
+.sidebar a img {
+  width: 20%;
+}
+
+.sidebar a span {
+  margin-left: 10px;
+}
+
+.sidebar .active {
+  background-color: #ffa901;
+  color: white;
+}
+
+.sidebar .submenu {
+  display: none;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+.sidebar .submenu a {
+  padding: 12px;
+  font-size: 16px;
+}
+
+.sidebar .active-submenu {
+  display: block;
+}
+
+.sidebar .h-4 {
+  height: 16px;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+       
+
+    </style>
+</head>
+
+<body>
+<div class="w-[22%] lg:block hidden overflow-y-auto fixed bg-white text-black h-full mb-12 sidebar">
+  <div class="h-[100vh]">
+    <div class="flex items-center justify-center mt-5 mb-11">
+      <img src="/logo.png" alt="Digital Menu" class="w-20 h-20 mr-2">
+    </div>
+
+    <div>
+      <a href="index.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium bg-[#ffa901] text-black p-2 text-lg font-semibold">
+        <img src="/menuIcon/dashboard.png" alt="menu_icon" class="w-[20%]">
+        <span>Dashboard</span>
+      </a>
+
+      <a href="menu.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-gray-800 p-2 text-lg font-semibold">
+        <img src="/menuIcon/menu.png" alt="menu_icon" class="w-[20%]">
+        <span>Menu</span>
+      </a>
+
+      <a href="offer.html" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Promo</span>
+      </a>
+      <div class="submenu">
+        <a href="/offer" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/offers.png" alt="menu_icon" class="w-[20%]">
+          <span>Offer</span>
+        </a>
+      </div>
+
+      <a href="/stock" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Stock</span>
+      </a>
+      <div class="submenu">
+        <a href="/stock" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/stock.png" alt="menu_icon" class="w-[20%]">
+          <span>Stock</span>
+        </a>
+        <a href="qr-code.html" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/qr_code.png" alt="menu_icon" class="w-[20%]">
+          <span>QR Code</span>
+        </a>
+      </div>
+
+      <a href="/order-history" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">History</span>
+      </a>
+      <div class="submenu">
+        <a href="/order-history" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/order.png" alt="menu_icon" class="w-[20%]">
+          <span>Order History</span>
+        </a>
+        <a href="/table-order" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/table.png" alt="menu_icon" class="w-[20%]">
+          <span>Table Order</span>
+        </a>
+      </div>
+
+      <a href="/employee" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Users</span>
+      </a>
+      <div class="submenu">
+        <a href="/employee" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/employees.png" alt="menu_icon" class="w-[20%]">
+          <span>Employees</span>
+        </a>
+      </div>
+
+      <a href="/extras" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">POS</span>
+      </a>
+      <div class="submenu">
+        <a href="/extras" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/sales_report.png" alt="menu_icon" class="w-[20%]">
+          <span>Point Of Sale</span>
+        </a>
+      </div>
+
+      <a href="/dashboard" class="w-[72%] mx-auto rounded-2xl flex gap-4 mt-2 items-center p-3 text-md font-medium text-black">
+        <span class="tracking-widest">Setup</span>
+      </a>
+      <div class="submenu">
+        <a href="/dashboard" class="w-[72%] mx-auto rounded-xl flex gap-4 mt-2 items-center p-2 text-lg font-semibold text-gray-800">
+          <img src="/menuIcon/logout.png" alt="menu_icon" class="w-[20%]">
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+        <h1>Current Offers</h1>
+
+        <!-- Button to add new offer -->
+        <button id="add-offer-btn" class="btn">Add New Offer</button>
+
+        <!-- Offer List -->
+        <div id="offer-list" class="offer-list">
+            <!-- Dynamic content will be added here -->
+        </div>
+    </div>
+
+    <!-- Modal for adding/editing offer -->
+    <div id="offer-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add New Offer</h2>
+            <form id="offer-form">
+                <label for="offer-name">Offer Name</label>
+                <input type="text" id="offer-name" required>
+
+                <label for="offer-description">Description</label>
+                <textarea id="offer-description" required></textarea>
+
+                <label for="offer-discount">Discount Percentage</label>
+                <input type="number" id="offer-discount" required>
+
+                <button type="submit" class="btn">Save Offer</button>
+            </form>
+        </div>
+    </div>
+<div id="sidebar-container"></div>
+<script>
+    fetch('sidebar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar-container').innerHTML = data;
+        });
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Menu Login & Sign Up</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+    }
+
+    /* Form Container */
+    .form-container {
+      width: 100%;
+      max-width: 400px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    /* Tabs (Sign Up / Log In) */
+    .tab-group {
+      display: flex;
+      justify-content: space-around;
+      background-color: #fff;
+      border-bottom: 2px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .tab {
+      font-size: 18px;
+    }
+
+    .tab a {
+      text-decoration: none;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .tab a:hover {
+      background-color: #feb47b;
+    }
+
+    .tab.active a {
+      background-color: #feb47b;
+      color: white;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Form Fields */
+    .field-wrap {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #666;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+      border-color: #feb47b;
+      outline: none;
+    }
+
+    /* Submit Button */
+    .button {
+      background-color: #feb47b;
+      color: white;
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ff7e5f;
+    }
+
+    .req {
+      color: red;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .form-container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .tab a {
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .button {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form">
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Sign Up Form -->
+        <div id="signup">   
+          <h1>Create an Account</h1>
+          <form id="signup-form">
+            <div class="field-wrap">
+              <label>First Name<span class="req">*</span></label>
+              <input type="text" required id="signup-first-name" autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+              <label>Last Name<span class="req">*</span></label>
+              <input type="text" required id="signup-last-name" autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+              <label>Email Address<span class="req">*</span></label>
+              <input type="email" required id="signup-email" autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+              <label>Password<span class="req">*</span></label>
+              <input type="password" required id="signup-password" autocomplete="off" />
+            </div>
+            <button type="submit" class="button">Get Started</button>
+          </form>
+        </div>
+
+        <!-- Log In Form -->
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+          <form id="login-form">
+            <div class="field-wrap">
+              <label>Email Address<span class="req">*</span></label>
+              <input type="email" required id="login-email" autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+              <label>Password<span class="req">*</span></label>
+              <input type="password" required id="login-password" autocomplete="off" />
+            </div>
+            <button type="submit" class="button">Log In</button>
+          </form>
+        </div>
+      </div><!-- tab-content -->
+    </div> <!-- /form -->
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Handle form switching
+    $('.tab a').on('click', function (e) {
+      e.preventDefault();
+      $(this).parent().addClass('active');
+      $(this).parent().siblings().removeClass('active');
+      target = $(this).attr('href');
+      $('.tab-content > div').not(target).hide();
+      $(target).fadeIn(600);
+    });
+
+    // Handle login form submission
+    $('#login-form').submit(function(e){
+      e.preventDefault();
+      let email = $('#login-email').val();
+      let password = $('#login-password').val();
+
+      // Hardcoded login credentials for demo purposes
+      if(email === 'test@example.com' && password === 'password123') {
+        // Save login status to local storage (to simulate keeping the user logged in)
+        localStorage.setItem('isLoggedIn', true);
+        alert('Login Successful');
+        window.location.href = 'index.html'; // Redirect to dashboard
+      } else {
+        alert('Invalid login credentials');
+      }
+    });
+
+    // Handle signup form submission
+    $('#signup-form').submit(function(e){
+      e.preventDefault();
+      // Handle signup here (e.g., send data to the server)
+      alert('Signup Successful');
+      // After successful signup, auto-login or redirect the user
+      localStorage.setItem('isLoggedIn', true);
+      window.location.href = 'index.html'; // Redirect to dashboard after signup
+    });
+
+    // Check if user is logged in, if so, redirect to dashboard
+    if(localStorage.getItem('isLoggedIn') === 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
